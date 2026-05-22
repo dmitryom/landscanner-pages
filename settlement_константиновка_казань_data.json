@@ -1,0 +1,31 @@
+{
+  "settlement_name": "Константиновка, Казань",
+  "boundary_source": "osm",
+  "total_area_m2": 4791966.521528341,
+  "total_area_ha": 479.1966521528341,
+  "occupied_area_m2": 145214.71310786903,
+  "occupied_area_ha": 14.521471310786904,
+  "occupied_percent": 3.0303782894867664,
+  "free_area_m2": 4646751.808420472,
+  "free_area_ha": 464.6751808420472,
+  "free_percent": 96.96962171051324,
+  "free_zones_count": 1,
+  "total_plots_found": 4130,
+  "occupied_plots_count": 2705,
+  "free_plots_count": 1425,
+  "restriction_zones_count": 0,
+  "restriction_zones_by_layer": {},
+  "vri_summary": {
+    "ДРУГОЕ": 719,
+    "ЖИЛОЙ": 123,
+    "ИЖС": 55,
+    "ЛПХ": 508,
+    "ТРАНСПОРТ": 8,
+    "КОМ": 5,
+    "ВОДНЫЙ": 1,
+    "СХ": 2,
+    "ОГП": 1,
+    "СВЯЗЬ": 1,
+    "СНТ": 2
+  }
+}
