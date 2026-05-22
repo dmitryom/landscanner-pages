@@ -13,9 +13,24 @@
   "total_plots_found": 2651,
   "occupied_plots_count": 2248,
   "free_plots_count": 403,
-  "restriction_zones_count": 574,
+  "restriction_zones_count": 2025,
   "restriction_zones_by_layer": {
-    "restriction-territorial-zones": 574
+    "restriction-zouit-power": 462,
+    "restriction-zouit-engineering": 1283,
+    "restriction-zouit-roadside": 10,
+    "restriction-zouit-geodetic": 65,
+    "restriction-zouit-communications": 39,
+    "restriction-zouit-water-protection": 16,
+    "restriction-zouit-shoreline-protection": 16,
+    "restriction-zouit-public-servitude": 33,
+    "restriction-zouit-pipeline-distance": 17,
+    "restriction-zouit-sanitary": 27,
+    "restriction-zouit-water-supply": 24,
+    "restriction-zouit-cultural": 14,
+    "restriction-zouit-pipelines": 9,
+    "restriction-zouit-transport": 5,
+    "restriction-zouit-aerodrome": 4,
+    "restriction-zouit-environment-monitoring": 1
   },
   "vri_summary": {
     "ДРУГОЕ": 44,
@@ -24,9 +39,9 @@
     "СХ": 16,
     "СВЯЗЬ": 1,
     "ОГП": 20,
-    "ТРАНСПОРТ": 5,
     "ИЖС": 4,
     "ВОДНЫЙ": 3,
+    "ТРАНСПОРТ": 5,
     "КОМ": 3
   }
 }
