@@ -27,9 +27,9 @@
     "restriction-zouit-sanitary": 27,
     "restriction-zouit-water-supply": 24,
     "restriction-zouit-cultural": 14,
-    "restriction-zouit-transport": 5,
-    "restriction-zouit-aerodrome": 4,
     "restriction-zouit-pipelines": 9,
+    "restriction-zouit-aerodrome": 4,
+    "restriction-zouit-transport": 5,
     "restriction-zouit-environment-monitoring": 1
   },
   "vri_summary": {
