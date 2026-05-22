@@ -16,20 +16,20 @@
   "restriction_zones_count": 3527,
   "restriction_zones_by_layer": {
     "restriction-zouit-engineering": 2309,
-    "restriction-zouit-power": 849,
-    "restriction-zouit-sanitary": 41,
-    "restriction-zouit-public-servitude": 56,
     "restriction-zouit-geodetic": 57,
     "restriction-zouit-water-supply": 60,
-    "restriction-zouit-communications": 44,
-    "restriction-zouit-pipelines": 17,
+    "restriction-zouit-sanitary": 41,
+    "restriction-zouit-power": 849,
+    "restriction-zouit-public-servitude": 56,
     "restriction-zouit-pipeline-distance": 54,
-    "restriction-zouit-other": 3,
+    "restriction-zouit-communications": 44,
     "restriction-zouit-shoreline-protection": 8,
-    "restriction-zouit-water-protection": 8,
+    "restriction-zouit-other": 3,
+    "restriction-zouit-pipelines": 17,
     "restriction-zouit-transport": 8,
     "restriction-zouit-roadside": 6,
     "restriction-zouit-environment-monitoring": 3,
+    "restriction-zouit-water-protection": 8,
     "restriction-zouit-aerodrome": 4
   },
   "vri_summary": {
@@ -39,8 +39,8 @@
     "ИЖС": 29,
     "ТРАНСПОРТ": 6,
     "СХ": 12,
-    "ОГП": 6,
     "ВОДНЫЙ": 2,
-    "ОТДЫХ": 1
+    "ОТДЫХ": 1,
+    "ОГП": 6
   }
 }
