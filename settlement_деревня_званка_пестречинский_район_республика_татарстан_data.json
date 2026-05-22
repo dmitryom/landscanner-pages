@@ -17,18 +17,18 @@
   "restriction_zones_by_layer": {
     "restriction-zouit-power": 462,
     "restriction-zouit-engineering": 1283,
-    "restriction-zouit-geodetic": 65,
-    "restriction-zouit-water-supply": 24,
-    "restriction-zouit-communications": 39,
-    "restriction-zouit-shoreline-protection": 16,
     "restriction-zouit-roadside": 10,
-    "restriction-zouit-sanitary": 27,
+    "restriction-zouit-geodetic": 65,
+    "restriction-zouit-communications": 39,
+    "restriction-zouit-water-protection": 16,
+    "restriction-zouit-shoreline-protection": 16,
     "restriction-zouit-public-servitude": 33,
+    "restriction-zouit-pipeline-distance": 17,
+    "restriction-zouit-sanitary": 27,
+    "restriction-zouit-water-supply": 24,
+    "restriction-zouit-cultural": 14,
     "restriction-zouit-transport": 5,
     "restriction-zouit-aerodrome": 4,
-    "restriction-zouit-cultural": 14,
-    "restriction-zouit-pipeline-distance": 17,
-    "restriction-zouit-water-protection": 16,
     "restriction-zouit-pipelines": 9,
     "restriction-zouit-environment-monitoring": 1
   },
@@ -37,12 +37,12 @@
     "ИЖС": 43,
     "ДРУГОЕ": 107,
     "ЖИЛОЙ": 27,
-    "ТРАНСПОРТ": 5,
     "ОГП": 14,
-    "СВЯЗЬ": 1,
-    "СХ": 10,
     "СНТ": 3,
+    "ТРАНСПОРТ": 5,
+    "СХ": 10,
+    "ВОДНЫЙ": 7,
     "ОТДЫХ": 4,
-    "ВОДНЫЙ": 7
+    "СВЯЗЬ": 1
   }
 }
