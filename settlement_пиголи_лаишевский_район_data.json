@@ -11,8 +11,8 @@
   "free_percent": 98.57913866485153,
   "free_zones_count": 1,
   "total_plots_found": 317,
-  "occupied_plots_count": 197,
-  "free_plots_count": 120,
+  "occupied_plots_count": 198,
+  "free_plots_count": 119,
   "restriction_zones_count": 51,
   "restriction_zones_by_layer": {
     "restriction-zouit-engineering": 25,
@@ -31,9 +31,9 @@
     "ЛПХ": 63,
     "ДРУГОЕ": 16,
     "ИЖС": 30,
-    "ОГП": 7,
-    "СХ": 2,
+    "СХ": 1,
     "СВЯЗЬ": 1,
+    "ОГП": 7,
     "ВОДНЫЙ": 1
   }
 }
