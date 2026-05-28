@@ -13,9 +13,9 @@
   "total_plots_found": 4131,
   "occupied_plots_count": 2707,
   "free_plots_count": 1424,
-  "restriction_zones_count": 458,
+  "restriction_zones_count": 459,
   "restriction_zones_by_layer": {
-    "restriction-zouit-power": 58,
+    "restriction-zouit-power": 59,
     "restriction-zouit-engineering": 273,
     "restriction-zouit-sanitary": 6,
     "restriction-zouit-water-protection": 2,
@@ -37,10 +37,10 @@
     "КОМ": 5,
     "СХ": 2,
     "ИЖС": 56,
-    "ВОДНЫЙ": 1,
     "СВЯЗЬ": 1,
     "ОГП": 1,
-    "СНТ": 2
+    "СНТ": 2,
+    "ВОДНЫЙ": 1
   },
   "created_at": "2026-05-22",
   "updated_at": "2026-05-28"
