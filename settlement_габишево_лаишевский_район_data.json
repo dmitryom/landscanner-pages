@@ -13,11 +13,11 @@
   "total_plots_found": 2256,
   "occupied_plots_count": 1390,
   "free_plots_count": 866,
-  "restriction_zones_count": 251,
+  "restriction_zones_count": 252,
   "restriction_zones_by_layer": {
     "restriction-zouit-engineering": 112,
     "restriction-zouit-communications": 6,
-    "restriction-zouit-power": 32,
+    "restriction-zouit-power": 33,
     "restriction-zouit-sanitary": 7,
     "restriction-zouit-water-supply": 5,
     "restriction-zouit-public-servitude": 5,
@@ -32,20 +32,24 @@
     "restriction-forestry": 1
   },
   "vri_summary": {
-    "ДРУГОЕ": 659,
-    "ТРАНСПОРТ": 39,
+    "ГАРАЖ": 174,
+    "КОМ": 4,
+    "ТРАНСПОРТ": 18,
+    "ДРУГОЕ": 324,
     "СНТ": 11,
     "ОГП": 21,
-    "ИЖС": 76,
-    "ЛПХ": 20,
-    "ЖИЛОЙ": 21,
+    "ИЖС": 168,
+    "ЖИЛОЙ": 88,
+    "СОЦИАЛЬНЫЙ": 7,
+    "СПОРТ": 4,
+    "ЛПХ": 19,
+    "КОММУН": 10,
     "СВЯЗЬ": 2,
-    "КОМ": 1,
-    "ОТДЫХ": 8,
-    "ПРОМ": 6,
-    "ВОДНЫЙ": 1,
-    "СХ": 1
+    "ДНП": 3,
+    "ОГОРОД": 3,
+    "СХ": 4,
+    "ПРОМ": 6
   },
   "created_at": "2026-05-22",
-  "updated_at": "2026-06-01"
+  "updated_at": "2026-06-02"
 }
