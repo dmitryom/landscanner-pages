@@ -9,6 +9,22 @@
     <style>
         html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
         #map { height: 100vh; height: 100dvh; width: 100%; }
+        .zoom-badge {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            z-index: 4;
+            background: rgba(255,255,255,0.92);
+            color: #1f2933;
+            font-size: 12px;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            padding: 4px 9px;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+            pointer-events: none;
+            user-select: none;
+        }
         .webgl-warning {
             position: fixed;
             inset: 0;
@@ -2724,6 +2740,7 @@
     </div>
     <button class="panel-restore" id="panelRestore" type="button" aria-controls="panelBody">Сводка</button>
     <div id="map"></div>
+    <div id="zoomBadge" class="zoom-badge" title="Уровень масштаба карты (zoom)">Зум —</div>
     <div id="webglWarning" class="webgl-warning" style="display:none;">
         <div class="webgl-warning-box">
             <div class="webgl-warning-title">⚠️ Карта не может отобразиться</div>
@@ -3732,6 +3749,14 @@
             };
             MeasureControl.prototype.onRemove = function() {};
             map.addControl(new MeasureControl(), 'top-left');
+            // Индикатор уровня масштаба (zoom)
+            var zoomBadge = document.getElementById('zoomBadge');
+            function updateZoomBadge() {
+                if (zoomBadge) { zoomBadge.textContent = 'Зум ' + map.getZoom().toFixed(1); }
+            }
+            map.on('zoom', updateZoomBadge);
+            updateZoomBadge();
+
 
             addRestrictionLayers();
             applyRestrictionLayerVisibility();
