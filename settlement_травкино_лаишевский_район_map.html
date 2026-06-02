@@ -158,6 +158,40 @@
             margin-bottom: 6px;
             font-size: 13px;
         }
+        .cad-search {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            margin: 8px 0 12px;
+        }
+        .cad-search input {
+            flex: 1;
+            min-width: 150px;
+            padding: 6px 8px;
+            border: 1px solid rgba(31,41,51,0.28);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .cad-search button {
+            padding: 6px 12px;
+            border: 0;
+            border-radius: 6px;
+            background: #124A9C;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .cad-search button:hover { background: #0d3a7a; }
+        .cad-search-status {
+            flex-basis: 100%;
+            font-size: 12px;
+            min-height: 14px;
+            color: #52616f;
+        }
+        .cad-search-status.err { color: #c0392b; }
+        .cad-search-status.ok { color: #2e7d32; }
         .map-layer-option {
             display: flex;
             align-items: center;
@@ -523,6 +557,12 @@
             <p>Участков на карте: <b>5090</b> / 5090</p>
             <p>Смежных участков НСПД: <b>0</b></p>
             <p>ЗОУИТ и ограничений: <b>332</b></p>
+            <div class="cad-search">
+                <input id="cadSearchInput" type="text" autocomplete="off" inputmode="numeric"
+                       placeholder="Поиск по кад. номеру, напр. 16:24:…">
+                <button id="cadSearchBtn" type="button" title="Найти участок на карте">Найти</button>
+                <div class="cad-search-status" id="cadSearchStatus"></div>
+            </div>
             <section class="panel-section" data-section-key="layers">
                 <button class="section-toggle" type="button" aria-expanded="true" aria-controls="sectionLayers">
                     <span>Слои</span>
@@ -3199,6 +3239,97 @@
                     )
                     .addTo(map);
             }
+            // --- Поиск по кадастровому номеру ---
+            var cadSearchInput = document.getElementById('cadSearchInput');
+            var cadSearchBtn = document.getElementById('cadSearchBtn');
+            var cadSearchStatus = document.getElementById('cadSearchStatus');
+            function normCad(s) {
+                return String(s || '').replace(/[^0-9:]/g, '');
+            }
+            var cadIndex = {};
+            []
+                .concat((plotData && plotData.features) || [])
+                .concat((pointData && pointData.features) || [])
+                .forEach(function(f) {
+                    var key = normCad(f.properties && f.properties.cadastral_number);
+                    if (key && !(key in cadIndex)) { cadIndex[key] = f; }
+                });
+            function geomBounds(geom) {
+                var min = [Infinity, Infinity], max = [-Infinity, -Infinity];
+                function visit(c) {
+                    if (typeof c[0] === 'number') {
+                        if (c[0] < min[0]) { min[0] = c[0]; }
+                        if (c[1] < min[1]) { min[1] = c[1]; }
+                        if (c[0] > max[0]) { max[0] = c[0]; }
+                        if (c[1] > max[1]) { max[1] = c[1]; }
+                    } else { c.forEach(visit); }
+                }
+                if (geom && geom.coordinates) { visit(geom.coordinates); }
+                if (min[0] === Infinity) { return null; }
+                return [min, max];
+            }
+            if (!map.getSource('cad-search')) {
+                map.addSource('cad-search', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+                map.addLayer({
+                    id: 'cad-search-fill', type: 'fill', source: 'cad-search',
+                    filter: ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]],
+                    paint: { 'fill-color': '#ff2d95', 'fill-opacity': 0.18 }
+                });
+                map.addLayer({
+                    id: 'cad-search-line', type: 'line', source: 'cad-search',
+                    filter: ['in', ['geometry-type'], ['literal', ['Polygon', 'MultiPolygon']]],
+                    paint: { 'line-color': '#ff2d95', 'line-width': 4, 'line-opacity': 0.95 }
+                });
+                map.addLayer({
+                    id: 'cad-search-point', type: 'circle', source: 'cad-search',
+                    filter: ['==', ['geometry-type'], 'Point'],
+                    paint: { 'circle-radius': 11, 'circle-color': 'rgba(255,45,149,0.25)', 'circle-stroke-color': '#ff2d95', 'circle-stroke-width': 3 }
+                });
+            }
+            function setCadStatus(msg, cls) {
+                if (!cadSearchStatus) { return; }
+                cadSearchStatus.textContent = msg || '';
+                cadSearchStatus.className = 'cad-search-status' + (cls ? ' ' + cls : '');
+            }
+            function clearCadHighlight() {
+                var src = map.getSource('cad-search');
+                if (src) { src.setData({ type: 'FeatureCollection', features: [] }); }
+            }
+            function runCadSearch() {
+                if (!cadSearchInput) { return; }
+                var q = normCad(cadSearchInput.value);
+                if (!q) { setCadStatus('Введите кадастровый номер', 'err'); clearCadHighlight(); return; }
+                var feat = cadIndex[q];
+                if (!feat) {
+                    var keys = Object.keys(cadIndex);
+                    var hitKey = keys.find(function(k) { return k.indexOf(q) !== -1; });
+                    if (hitKey) { feat = cadIndex[hitKey]; }
+                }
+                if (!feat) { setCadStatus('Участок не найден на этой карте', 'err'); clearCadHighlight(); return; }
+                var src = map.getSource('cad-search');
+                if (src) { src.setData({ type: 'FeatureCollection', features: [feat] }); }
+                var b = geomBounds(feat.geometry);
+                var center = null;
+                if (b) {
+                    center = [(b[0][0] + b[1][0]) / 2, (b[0][1] + b[1][1]) / 2];
+                    map.fitBounds(b, { padding: 140, maxZoom: 18, duration: 800 });
+                } else if (feat.geometry && feat.geometry.type === 'Point') {
+                    center = feat.geometry.coordinates;
+                    map.flyTo({ center: center, zoom: 17, duration: 800 });
+                }
+                var popupFn = (feat.properties && feat.properties.is_adjacent === true) ? adjacentPlotPopup : plotPopup;
+                if (center) {
+                    window.setTimeout(function() { popupFn({ features: [feat], lngLat: center }); }, 820);
+                }
+                setCadStatus('Найден: ' + ((feat.properties && feat.properties.cadastral_number) || q), 'ok');
+            }
+            if (cadSearchBtn) { cadSearchBtn.addEventListener('click', runCadSearch); }
+            if (cadSearchInput) {
+                cadSearchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); runCadSearch(); }
+                });
+            }
+
             ['plots-fill', 'plots-border', 'plots-points', 'plots-fill-mixed', 'plots-border-mixed', 'plots-points-mixed'].forEach(function(id) {
                 if (map.getLayer(id)) {
                     map.on('click', id, plotPopup);
